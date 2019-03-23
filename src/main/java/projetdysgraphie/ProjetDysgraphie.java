@@ -5,6 +5,9 @@
  */
 package projetdysgraphie;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  *
  * @author Utilisateur
@@ -14,8 +17,10 @@ public class ProjetDysgraphie {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+        File f = new File("fichier2.txt");
+        Trace t = new Trace(f);
+        System.out.println(t.getPoint().toString());
     }
     
 }
