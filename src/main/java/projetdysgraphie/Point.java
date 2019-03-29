@@ -21,7 +21,10 @@ public class Point implements Comparable {
         this.inter = inter;
         this.num = num;
     }
-    
+    public Point(double x, double y){
+		this.x=(int) x;
+		this.y=(int) y;
+	}
     /**
      * Calcule la distance entre 2 points
      * @param p
@@ -59,4 +62,11 @@ public class Point implements Comparable {
     public String toString(){
         return "N°"+num+"\tx:"+x+"\ty:"+y+"\tinter:"+inter;
     }
+    public double getX(){
+		return this.x;
+	}
+ 
+	public double getY(){
+		return this.y;
+	}
 }
