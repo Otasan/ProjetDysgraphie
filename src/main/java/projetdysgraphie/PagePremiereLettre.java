@@ -172,10 +172,12 @@ public class PagePremiereLettre extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         TraceurCourbes Traceur= new TraceurCourbes();
-         TraceurCourbes c= new TraceurCourbes();
-         
+         //TraceurCourbes Traceur= new TraceurCourbes();
+         Courbe c = new Courbe();
+         c.setSize(200, 500);
          panel2.add(c);
+         panel2.setVisible(true);
+         javax.swing.JFrame a = new javax.swing.JFrame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

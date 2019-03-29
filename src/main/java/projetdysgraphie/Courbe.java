@@ -48,6 +48,7 @@ public class Courbe extends JPanel{
 		this.repaint();		
 	}
  
+        @Override
 	public void paint(Graphics g){
 		super.paint(g);
  
@@ -84,8 +85,8 @@ public class Courbe extends JPanel{
 			}	
  
 			Point p1=this.convertirPointSurReferenciel(this.listePoints.get(this.listePoints.size()-1));
-			int x1=(int)p1.getX();
-			int y1=(int)p1.getY();
+			int x1=p1.getX();
+			int y1=p1.getY();
 			g.drawLine(x1-4, y1, x1+4, y1);
 			g.drawLine(x1, y1-4, x1, y1+4);
 		}		
@@ -106,22 +107,8 @@ public class Courbe extends JPanel{
 		x=x+this.left;
 		y=y+this.top;
  
-		return new Point(x, y);
+		return new Point((int)x, (int)y, 0, 0);
 	}
-        
-        public void estVisible(){
-                this.ajouterPoint(new Point(5, 6681.8929));
-		this.ajouterPoint(new Point(10, 11834.3456));
-		this.ajouterPoint(new Point(20, 37059.7267));
-		this.ajouterPoint(new Point(30, 32249.5167));
-		this.ajouterPoint(new Point(40, 11503.6712));
-		this.ajouterPoint(new Point(50, 7485.3936));
-		this.ajouterPoint(new Point(60, 5720.6952));
-		this.ajouterPoint(new Point(70, 4762.9483));
-		this.ajouterPoint(new Point(80, 4207.3249));
-		this.ajouterPoint(new Point(90, 3880.5546));
-                this.setVisible(true);
-        }
         
         
 }
