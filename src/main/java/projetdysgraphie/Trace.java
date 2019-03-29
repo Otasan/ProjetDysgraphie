@@ -7,8 +7,10 @@ package projetdysgraphie;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -18,7 +20,23 @@ public class Trace {
     private List<Point> myPoints;
     
     public Trace(File source) throws IOException{
-        Lecteur l = new Lecteur(source);
+        Scanner sc = new Scanner(source);
+        Lecteur l = null;
+        if(!sc.next().equals("Identification")){
+            l = new Lecteur(source);
+        }
+        else{
+           sc.nextLine();
+           sc.nextLine();
+           sc.nextLine();
+           sc.nextLine();
+           String input ="";
+           while(sc.hasNextLine()){
+               input+="\n"+sc.nextLine();
+           }
+           StringReader sourceStr = new StringReader(input);
+           l = new Lecteur(sourceStr);
+        }
         myPoints = l.lire();
     }
     public Trace(List<Point> mP){

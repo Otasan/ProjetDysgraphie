@@ -18,7 +18,7 @@ public class ProjetDysgraphie {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        File f = new File("fichier2.txt");
+        File f = new File("fichier3.txt");
         Trace t = new Trace(f);
         System.out.println(t.getPoint().toString());
     }
