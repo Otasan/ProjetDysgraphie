@@ -16,6 +16,7 @@ public class DeuxiemePage extends javax.swing.JFrame {
      */
     public DeuxiemePage() {
         initComponents();
+        jLabel2.setVisible(false);
     }
 
     /**
@@ -89,6 +90,7 @@ public class DeuxiemePage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        jLabel2.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

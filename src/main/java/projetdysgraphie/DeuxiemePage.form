@@ -66,9 +66,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\crouvera\Pictures\AIG2330852.jpg"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="jLabel3"/>
       </Properties>
       <Constraints>
@@ -79,9 +76,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\crouvera\Pictures\33887325-bonne-bande-dessin&#xe9;e-smiley-&#xe9;motic&#xf4;nes-visage.jpg"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
       <Constraints>
@@ -92,9 +86,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\crouvera\Pictures\33887325-bonne-bande-dessin&#xe9;e-smiley-&#xe9;motic&#xf4;nes-visage.jpg"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="jLabel4"/>
       </Properties>
       <Constraints>
