@@ -68,6 +68,10 @@ public class Point implements Comparable {
 	return this.y;
     }
     
+    /**
+     * transforme un Point en PointAffichage
+     * @return 
+     */
     public PointAffichage toPointAffichage(){
         return new PointAffichage((double)x, (double)y);
     }

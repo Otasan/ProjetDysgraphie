@@ -35,6 +35,10 @@ public class Courbe extends JPanel {
             ajouterPoint(p);
         }
     }
+    
+    public Courbe(List<PointAffichage> lesPoints){
+        listePoints = (ArrayList<PointAffichage>) lesPoints;
+    }
 
     /**
      * converti un point en PointAffichage et l'ajoute à listePoints

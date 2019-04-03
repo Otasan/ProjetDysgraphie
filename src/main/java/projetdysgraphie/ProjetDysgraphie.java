@@ -20,7 +20,6 @@ public class ProjetDysgraphie {
     public static void main(String[] args) throws IOException {
         File f = new File("fichier0.txt");
         Trace t = new Trace(f);
-        System.out.println(t.getPoint().toString());
         PagePremiereLettre p = new PagePremiereLettre(t);
         p.setVisible(true);
     }

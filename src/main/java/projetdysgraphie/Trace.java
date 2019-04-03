@@ -60,4 +60,22 @@ public class Trace {
         return res;
     }
     
+    public List<PointAffichage> getPointsAcceleration(){
+        ArrayList<PointAffichage> res = new ArrayList();
+        List<Double> accel = getAcceleration();
+        Double min = accel.get(0);
+        for(int i=0;i<accel.size();i++){
+            res.add(new PointAffichage(i,accel.get(i)*10));
+            if(accel.get(i)*10<min){
+                min = accel.get(i)*10;
+            }
+        }
+        if(min<0){
+            for(PointAffichage p:res){
+                p.setY(p.getY()-min);
+            }
+        }
+        return res;
+    }
+    
 }
