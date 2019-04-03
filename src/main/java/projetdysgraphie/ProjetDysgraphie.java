@@ -21,6 +21,7 @@ public class ProjetDysgraphie {
         File f = new File("fichier3.txt");
         Trace t = new Trace(f);
         System.out.println(t.getPoint().toString());
+        PagePremiereLettre p = new PagePremiereLettre(t);
     }
     
 }

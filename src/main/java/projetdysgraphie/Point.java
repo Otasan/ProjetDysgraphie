@@ -67,4 +67,8 @@ public class Point implements Comparable {
     public int getY(){
 	return this.y;
     }
+    
+    public PointAffichage toPointAffichage(){
+        return new PointAffichage((double)x, (double)y);
+    }
 }

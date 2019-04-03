@@ -2,6 +2,7 @@ package projetdysgraphie;
 
 
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,12 +14,14 @@ package projetdysgraphie;
  * @author cbason
  */
 public class PagePremiereLettre extends javax.swing.JFrame {
-
+    private Trace tModele;
     /**
      * Creates new form NewJFrame
      */
-    public PagePremiereLettre() {
+    public PagePremiereLettre(Trace t) {
+        tModele=t;
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -173,11 +176,15 @@ public class PagePremiereLettre extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          //TraceurCourbes Traceur= new TraceurCourbes();
-         Courbe c = new Courbe();
-         c.setSize(200, 500);
+         System.out.println("J'affiche la courbe");
+         Courbe c = new Courbe(tModele);
+         System.out.println(c);
+         c.setSize(500, 700);
+         c.repaint();
+         c.setVisible(true);
          panel2.add(c);
          panel2.setVisible(true);
-         javax.swing.JFrame a = new javax.swing.JFrame();
+         //javax.swing.JFrame a = new javax.swing.JFrame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -211,7 +218,7 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PagePremiereLettre().setVisible(true);
+                //new PagePremiereLettre().setVisible(true);
             }
         });
     }
