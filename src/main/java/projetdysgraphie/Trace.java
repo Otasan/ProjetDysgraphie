@@ -65,9 +65,11 @@ public class Trace {
         List<Double> accel = getAcceleration();
         Double min = accel.get(0);
         for(int i=0;i<accel.size();i++){
-            res.add(new PointAffichage(i,accel.get(i)*10));
-            if(accel.get(i)*10<min){
-                min = accel.get(i)*10;
+            double y=accel.get(i);
+            PointAffichage p = new PointAffichage(i,y);
+            res.add(p);
+            if(y<min){
+                min = y;
             }
         }
         if(min<0){

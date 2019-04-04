@@ -102,6 +102,7 @@ public class Courbe extends JPanel {
             int y1 = (int) p1.getY();
             g.drawLine(x1 - 4, y1, x1 + 4, y1);
             g.drawLine(x1, y1 - 4, x1, y1 + 4);
+            
         }
     }
 
@@ -130,13 +131,29 @@ public class Courbe extends JPanel {
 
     /**
      * Converti un PointAffichage pour l'afficher sur le même reférentiel que les autres.
-     * Si ce point existe déjà dans la liste, il sera supprimé
      * @param p
      * @return 
      */
     public PointAffichage convertirPointSurReferenciel(PointAffichage p) {
-        if (listePoints.contains(p)) {
-            listePoints.remove(p);
+        if(xMax<xMin || yMax<yMin){
+            xMin=p.getX();
+            xMax=p.getX();
+            yMin=p.getY();
+            yMax=p.getY();
+            for(PointAffichage pi:listePoints){
+                if(pi.getX()<xMin){
+                    xMin = pi.getX();
+                }
+                else if(pi.getX()>xMax){
+                    xMax = pi.getX();
+                }
+                if(pi.getY()<yMin){
+                    yMin = pi.getY();
+                }
+                else if(pi.getY()>yMax){
+                    yMax = pi.getY();
+                }
+            }
         }
         double amplitudeX = this.xMax - this.xMin;
         double amplitudeY = this.yMax - this.yMin;
@@ -146,7 +163,12 @@ public class Courbe extends JPanel {
 
         double x = (p.getX() - this.xMin) * rapportX;
         double y = (p.getY() - this.yMin) * rapportY;
-
+        if(rapportX<Math.pow(10.0, -5)){
+            x=(p.getX() - this.xMin);
+        }
+        if(rapportY<Math.pow(10.0, -5)){
+            x=(p.getY() - this.yMin);
+        }
         y = this.hauteur - y;
 
         x = x + this.left;

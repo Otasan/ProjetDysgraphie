@@ -2,7 +2,13 @@ package projetdysgraphie;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.JFileChooser;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 
 
@@ -25,22 +31,34 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         tModele=t;
         initComponents();
         
+        afficherGraphs();
+    }
+    
+    public void afficherGraphs(){
         JPanel c = new Courbe(tModele);
         courbeTrace.removeAll();
+        courbeTrace.validate();
         c.setSize(courbeTrace.getSize());
         courbeTrace.add(c);
         
-        /*
         JPanel ca = new Courbe(tModele.getPointsAcceleration());
-        courbeAccel.removeAll();
-        System.out.println(ca.toString());
+        /*courbeAccel.removeAll();
+        courbeAccel.validate();
         c.setSize(courbeAccel.getSize());
         courbeAccel.add(ca);
+        
+        courbeAccel.setVisible(true);
+        courbeAccel.validate();*/
+        courbeAccel = ca;
+        courbeAccel.setVisible(true);
+        courbeTrace.setVisible(true);
+        courbeTrace.validate();
+        this.validate();
+        
         JFrame a = new JFrame();
         a.add(ca);
+        a.setSize(500,400);
         a.setVisible(true);
-        */
-        this.validate();
     }
 
     /**
@@ -64,7 +82,7 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         courbeTrace = new javax.swing.JPanel();
         courbeAccel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuFichier = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,8 +131,13 @@ public class PagePremiereLettre extends javax.swing.JFrame {
             .addGap(0, 87, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        menuFichier.setText("File");
+        menuFichier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFichierMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuFichier);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -188,6 +211,20 @@ public class PagePremiereLettre extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void menuFichierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFichierMouseClicked
+        JFileChooser f = new JFileChooser();
+        int result = f.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File fichier = f.getSelectedFile();
+            try {
+                tModele = new Trace(fichier);
+                afficherGraphs();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "fichier : "+fichier.getAbsolutePath()+" introuvable");
+            }
+        }
+    }//GEN-LAST:event_menuFichierMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel courbeAccel;
     private javax.swing.JPanel courbeTrace;
@@ -197,11 +234,11 @@ public class PagePremiereLettre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JMenu menuFichier;
     // End of variables declaration//GEN-END:variables
 }
