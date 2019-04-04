@@ -1,5 +1,6 @@
 package projetdysgraphie;
 
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JFileChooser;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -26,6 +28,7 @@ public class PagePremiereLettre extends javax.swing.JFrame {
     private Trace tModele;
     /**
      * Creates new form NewJFrame
+     * @param t
      */
     public PagePremiereLettre(Trace t) {
         tModele=t;
@@ -34,31 +37,26 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         afficherGraphs();
     }
     
+    /**
+     * Permet d'afficher les graphiques calulés à partir d'un fichier
+     * TODO: Ajouter autre entrée
+     */
     public void afficherGraphs(){
+        JPanel ca = new Courbe(tModele.getPointsAcceleration());
+        courbeAccel.removeAll();
+        ca.setSize(courbeAccel.getSize());
+        courbeAccel.add(ca);
+        
         JPanel c = new Courbe(tModele);
         courbeTrace.removeAll();
-        courbeTrace.validate();
         c.setSize(courbeTrace.getSize());
         courbeTrace.add(c);
         
-        JPanel ca = new Courbe(tModele.getPointsAcceleration());
-        /*courbeAccel.removeAll();
-        courbeAccel.validate();
-        c.setSize(courbeAccel.getSize());
-        courbeAccel.add(ca);
-        
-        courbeAccel.setVisible(true);
-        courbeAccel.validate();*/
-        courbeAccel = ca;
         courbeAccel.setVisible(true);
         courbeTrace.setVisible(true);
-        courbeTrace.validate();
-        this.validate();
-        
-        JFrame a = new JFrame();
-        a.add(ca);
-        a.setSize(500,400);
-        a.setVisible(true);
+        this.pack();
+        revalidate();
+        repaint();
     }
 
     /**
