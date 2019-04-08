@@ -11,7 +11,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import javax.swing.JPanel;
 
 /**
  *
@@ -22,7 +21,7 @@ public class Trace {
     
     public Trace(File source) throws IOException{
         Scanner sc = new Scanner(source);
-        Lecteur l = null;
+        Lecteur l;
         if(!sc.next().equals("Identification")){
             l = new Lecteur(source);
         }
@@ -51,11 +50,13 @@ public class Trace {
     public List<Double> getAcceleration(){
         List<Double> res = new ArrayList();
         for(int i=1;i<myPoints.size()-1;i++){
-            Point pAv = myPoints.get(i-1);
-            Point pMi = myPoints.get(i);
-            Point pAp = myPoints.get(i+1);
-            Double acc = (pAv.vitesseEntre(pMi)-pMi.vitesseEntre(pAp))/((double)(pMi.getInterval()+pAp.getInterval()));
-            res.add(acc);
+            if(i%2==0){
+                Point pAv = myPoints.get(i-1);
+                Point pMi = myPoints.get(i);
+                Point pAp = myPoints.get(i+1);
+                Double acc = (pAv.vitesseEntre(pMi)-pMi.vitesseEntre(pAp))/((double)(pMi.getInterval()+pAp.getInterval()));
+                res.add(acc);
+            }
         }
         return res;
     }
