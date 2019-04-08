@@ -5,11 +5,14 @@
  */
 package projetdysgraphie;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author crouvera
  */
-public class DeuxiemePage extends javax.swing.JFrame {
+public class DeuxiemePage extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form NewJFrame
@@ -138,4 +141,9 @@ public class DeuxiemePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
