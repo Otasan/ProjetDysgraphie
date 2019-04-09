@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,17 +25,24 @@ import javax.swing.JOptionPane;
  *
  * @author cbason
  */
-public class PagePremiereLettre extends javax.swing.JFrame {
-    private Trace tModele;
+public class PageDeuxiemeLettre extends javax.swing.JFrame {
+    private Trace modele;
+    private Trace essai;
+    
     /**
      * Creates new form NewJFrame
-     * @param t
+     * @param tModele
      */
-    public PagePremiereLettre(Trace t) {
-        tModele=t;
+    public PageDeuxiemeLettre(Trace tModele) {
+        modele=tModele;
         initComponents();
-        
-        afficherGraphs();
+        /*try {
+            essai = new Trace(new File("fichier0.txt"));
+        } catch (IOException ex) {
+            Logger.getLogger(PageDeuxiemeLettre.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        chargerFichier();
+        chargerImage(modele.estSimilaireAuModele(essai));
     }
     
     /**
@@ -42,21 +50,56 @@ public class PagePremiereLettre extends javax.swing.JFrame {
      * TODO: Ajouter autre entrée
      */
     public void afficherGraphs(){
-        JPanel ca = new Courbe(tModele.getPointsAcceleration());
+        JPanel ca = new Courbe(essai.getPointsAcceleration());
         courbeAccel.removeAll();
         ca.setSize(courbeAccel.getSize());
         courbeAccel.add(ca);
-        
-        JPanel c = new Courbe(tModele);
+
+        JPanel c = new Courbe(essai);
         courbeTrace.removeAll();
         c.setSize(courbeTrace.getSize());
         courbeTrace.add(c);
-        
+
         courbeAccel.setVisible(true);
         courbeTrace.setVisible(true);
         this.pack();
         revalidate();
         repaint();
+    }
+    
+    public void chargerFichier() {
+        JFileChooser f = new JFileChooser();
+        int result = f.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fichier = f.getSelectedFile();
+            try {
+                essai = new Trace(fichier);
+                afficherGraphs();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "fichier : " + fichier.getAbsolutePath() + " introuvable");
+            }
+        }
+    }
+    
+    public void chargerImage(boolean bon){
+        String image;
+        if(bon){
+            image = "Oui.png";
+        }
+        else{
+            image = "Non.png";
+        }
+        ImageIcon img = new ImageIcon(image);
+        JLabel label = new JLabel();
+        label.setIcon(img);
+        label.setSize(panelImage.getSize());
+        panelImage.removeAll();
+        panelImage.add(label);
+        label.setVisible(true);
+        panelImage.setVisible(true);
+        this.pack();
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -77,6 +120,7 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         courbeTrace = new javax.swing.JPanel();
         courbeAccel = new javax.swing.JPanel();
+        panelImage = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFichier = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -123,6 +167,17 @@ public class PagePremiereLettre extends javax.swing.JFrame {
             .addGap(0, 87, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout panelImageLayout = new javax.swing.GroupLayout(panelImage);
+        panelImage.setLayout(panelImageLayout);
+        panelImageLayout.setHorizontalGroup(
+            panelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        panelImageLayout.setVerticalGroup(
+            panelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         menuFichier.setText("File");
         menuFichier.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -144,12 +199,17 @@ public class PagePremiereLettre extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(courbeAccel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(303, 303, 303))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(courbeAccel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,12 +217,12 @@ public class PagePremiereLettre extends javax.swing.JFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(105, 105, 105))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 79, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(courbeTrace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 121, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,46 +234,36 @@ public class PagePremiereLettre extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(courbeTrace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(courbeAccel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(courbeAccel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         PageDeuxiemeLettre p= new PageDeuxiemeLettre(tModele);
-         p.setVisible(true);
-         this.dispose();
-         
+        chargerFichier();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void menuFichierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFichierMouseClicked
-        JFileChooser f = new JFileChooser();
-        int result = f.showOpenDialog(this);
-        if(result == JFileChooser.APPROVE_OPTION){
-            File fichier = f.getSelectedFile();
-            try {
-                tModele = new Trace(fichier);
-                afficherGraphs();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "fichier : "+fichier.getAbsolutePath()+" introuvable");
-            }
-        }
+        chargerFichier();
     }//GEN-LAST:event_menuFichierMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -229,5 +279,6 @@ public class PagePremiereLettre extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JMenu menuFichier;
+    private javax.swing.JPanel panelImage;
     // End of variables declaration//GEN-END:variables
 }
