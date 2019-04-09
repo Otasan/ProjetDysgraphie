@@ -68,6 +68,10 @@ public class Point implements Comparable {
 	return this.y;
     }
     
+    public void setInter(int inter){
+        this.inter = inter;
+    }
+    
     /**
      * transforme un Point en PointAffichage
      * @return 
