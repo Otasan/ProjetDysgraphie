@@ -31,10 +31,12 @@ public class Point implements Comparable {
         return Math.sqrt(Math.pow(p.x-this.x,2)+Math.pow(p.y-this.y, 2));
     }
     
+    /**
+     * calcul la vitesse entre this et le point p
+     * @param p
+     * @return 
+     */
     public double vitesseEntre(Point p){
-        /*if(this.num+1!=p.num && this.num-1!=p.num){
-            throw new PointException("calcul de vitesse entre deux points non consécutifs");
-        }*/
         int interval;
         if(this.num>p.num){
             interval = p.inter;
@@ -74,6 +76,7 @@ public class Point implements Comparable {
     
     /**
      * transforme un Point en PointAffichage
+     * TODO: fusionner la classe Point et PointAffichage
      * @return 
      */
     public PointAffichage toPointAffichage(){

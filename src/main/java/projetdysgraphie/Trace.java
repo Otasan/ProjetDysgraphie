@@ -19,6 +19,11 @@ import java.util.Scanner;
 public class Trace {
     private List<Point> myPoints;
     
+    /**
+     * créé un objet tracé correspondant au CSV source
+     * @param source
+     * @throws IOException 
+     */
     public Trace(File source) throws IOException{
         Scanner sc = new Scanner(source);
         Lecteur l;
@@ -47,25 +52,36 @@ public class Trace {
         myPoints = mP;
     }
     
+    /**
+     * 
+     * @return points contenus dans le tracé
+     */
     public List<Point> getPoint(){
         return myPoints;
     }
-    
-    public List<Double> getAcceleration(){
+ 
+    /**
+     * calcul l'acceleration en tout point du trace, sauf le premier et le dernier.
+     * se sert de la moyenne des intervales du trace au lieu de celle réelle pour éviter les faux pics d'acceleration 
+     * @return liste des valeurs d'acceleration du trace
+     */
+    public List<Double> getAcceleration() {
         List<Double> res = new ArrayList();
         Double averageInterval = getAverageInter();
-        for(int i=1;i<myPoints.size()-1;i++){
-            //if(i%2==0){
-                Point pAv = myPoints.get(i-1);
-                Point pMi = myPoints.get(i);
-                Point pAp = myPoints.get(i+1);
-                Double acc = (pAv.vitesseEntre(pMi)-pMi.vitesseEntre(pAp))/((double)2*averageInterval);
-                res.add(acc);
-            //}
+        for (int i = 1; i < myPoints.size() - 1; i++) {
+            Point pAv = myPoints.get(i - 1);
+            Point pMi = myPoints.get(i);
+            Point pAp = myPoints.get(i + 1);
+            Double acc = (pAv.vitesseEntre(pMi) - pMi.vitesseEntre(pAp)) / ((double) 2 * averageInterval);
+            res.add(acc);
         }
         return res;
     }
-    
+
+    /**
+     * 
+     * @return la moyenne d'intervales de temps entre les points
+     */
     public double getAverageInter(){
         double res = 0;
         for(Point p:myPoints){
@@ -75,6 +91,10 @@ public class Trace {
         return res;
     }
     
+    /**
+     * 
+     * @return une liste de points affichages de valur x=num et y=acceleration
+     */
     public List<PointAffichage> getPointsAcceleration(){
         ArrayList<PointAffichage> res = new ArrayList();
         List<Double> accel = getAcceleration();
@@ -95,6 +115,11 @@ public class Trace {
         return res;
     }
     
+    /**
+     * fait la moyenne de toutes les valeurs remise en positif d'un liste
+     * @param l
+     * @return 
+     */
     public double moyennePositive(List<Double> l){
         double res = 0;
         for(double d:l){
@@ -104,6 +129,10 @@ public class Trace {
         return res;
     }
     
+    /**
+     * 
+     * @return le nombre de pic d'acceleration supérieurs à 1/2*moyenne d'acceleration positive du tracé
+     */
     public int getNbPic(){
         int res = 0;
         int signe = 0;
@@ -128,6 +157,11 @@ public class Trace {
         return res;
     }
     
+    /**
+     * verifie l'essai est semblable au modèle avec une marge d'erreur de 20% (compare le nombre de pics)
+     * @param essai tracé à verifier
+     * @return 
+     */
     public boolean estSimilaireAuModele(Trace essai){
         int nbPicModele = getNbPic();
         int nbPicEssai = essai.getNbPic();

@@ -36,11 +36,6 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
     public PageDeuxiemeLettre(Trace tModele) {
         modele=tModele;
         initComponents();
-        /*try {
-            essai = new Trace(new File("fichier0.txt"));
-        } catch (IOException ex) {
-            Logger.getLogger(PageDeuxiemeLettre.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         chargerFichier();
         chargerImage(modele.estSimilaireAuModele(essai));
     }
@@ -67,6 +62,9 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
         repaint();
     }
     
+    /**
+     * Charge le Trace "essai"
+     */
     public void chargerFichier() {
         JFileChooser f = new JFileChooser();
         int result = f.showOpenDialog(this);
@@ -81,6 +79,10 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * charge et affiche l'image selon l'exactitude de l'écriture
+     * @param bon bon=true si elles sont assez similaires, false sinon
+     */
     public void chargerImage(boolean bon){
         String image;
         if(bon){
@@ -258,10 +260,19 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * permet d'effectuer une action lorsque le bouton "oui" est cliqué
+     * TODO: trouver une utilité ou supprimer ce bouton
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         chargerFichier();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Permet de charger un nouvel essai lors du clic sur le menu "fichier"
+     * @param evt 
+     */
     private void menuFichierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFichierMouseClicked
         chargerFichier();
     }//GEN-LAST:event_menuFichierMouseClicked

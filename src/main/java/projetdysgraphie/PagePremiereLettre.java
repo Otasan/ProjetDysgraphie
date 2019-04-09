@@ -194,6 +194,10 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * lance la pageDeuxième lettre lors du clic sur le jButton1
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          PageDeuxiemeLettre p= new PageDeuxiemeLettre(tModele);
@@ -202,6 +206,10 @@ public class PagePremiereLettre extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * ouvre l'explorateur de fichier et permet de selectionner un fichier CSV à lire lors du clic sur le menu fichier
+     * @param evt 
+     */
     private void menuFichierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFichierMouseClicked
         JFileChooser f = new JFileChooser();
         int result = f.showOpenDialog(this);

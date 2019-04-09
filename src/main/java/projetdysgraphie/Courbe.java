@@ -29,6 +29,10 @@ public class Courbe extends JPanel {
     private int left = 10;
     private int top = 10;
 
+    /**
+     * Constructeur utilisé pour le tracé de la lettre
+     * @param t 
+     */
     public Courbe(Trace t) {
         List<Point> lesPoints = t.getPoint();
         for(Point p:lesPoints){
@@ -36,6 +40,10 @@ public class Courbe extends JPanel {
         }
     }
     
+    /**
+     * Constructeur utilisé poir les tracés d'accelerations
+     * @param lesPoints 
+     */
     public Courbe(List<PointAffichage> lesPoints){
         listePoints = (ArrayList<PointAffichage>) lesPoints;
     }
@@ -60,6 +68,15 @@ public class Courbe extends JPanel {
         this.listePoints.add(p.toPointAffichage());
 
         this.repaint();
+    }
+    
+    /**
+     * ajoute une nouvelle courbe à afficher en plus de la première (en changeant sa couleur)
+     * TODO: implémenter
+     * @param t 
+     */
+    public void ajouterCourbe(Trace t){
+        
     }
 
     @Override
