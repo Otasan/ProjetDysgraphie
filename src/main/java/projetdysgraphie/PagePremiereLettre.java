@@ -36,6 +36,9 @@ public class PagePremiereLettre extends javax.swing.JFrame {
         
         afficherGraphs();
     }
+    public PagePremiereLettre() {
+        initComponents();
+    }
     
     /**
      * Permet d'afficher les graphiques calulés à partir d'un fichier

@@ -36,8 +36,6 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
     public PageDeuxiemeLettre(Trace tModele) {
         modele=tModele;
         initComponents();
-        chargerFichier();
-        chargerImage(modele.estSimilaireAuModele(essai));
     }
     
     /**
@@ -73,6 +71,7 @@ public class PageDeuxiemeLettre extends javax.swing.JFrame {
             try {
                 essai = new Trace(fichier);
                 afficherGraphs();
+                chargerImage(modele.estSimilaireAuModele(essai));
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "fichier : " + fichier.getAbsolutePath() + " introuvable");
             }

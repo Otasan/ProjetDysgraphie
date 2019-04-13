@@ -5,7 +5,6 @@
  */
 package projetdysgraphie;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -16,11 +15,10 @@ public class ProjetDysgraphie {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        File f = new File("fichier0.txt");
-        Trace t = new Trace(f);
-        PagePremiereLettre p = new PagePremiereLettre(t);
+        PagePremiereLettre p = new PagePremiereLettre();
         p.setVisible(true);
     }
     
